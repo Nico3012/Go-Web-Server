@@ -1,13 +1,24 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 )
 
-func main() {
-	http.Handle("/", http.FileServer(http.Dir("./app")))
+var (
+	// cert = "/etc/letsencrypt/live/liquipay.de/fullchain.pem"
+	// key  = "/etc/letsencrypt/live/liquipay.de/privkey.pem"
+	cert = "tls/cert.pem"
+	key  = "tls/key.pem"
+)
 
-	fmt.Println("starting server...")
-	http.ListenAndServeTLS(":5000", "/etc/letsencrypt/live/liquipay.de/fullchain.pem", "/etc/letsencrypt/live/liquipay.de/privkey.pem", nil)
+func main() {
+	fileServer := http.FileServer(http.Dir("./app"))
+	http.Handle("/", fileServer)
+
+	err := http.ListenAndServeTLS(":443", cert, key, nil)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }
