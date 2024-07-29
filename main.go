@@ -8,8 +8,8 @@ import (
 var (
 	// cert = "/etc/letsencrypt/live/liquipay.de/fullchain.pem"
 	// key  = "/etc/letsencrypt/live/liquipay.de/privkey.pem"
-	cert = "tls/cert.pem"
-	key  = "tls/key.pem"
+	cert = "tls/trust/cert.pem"
+	key  = "tls/trust/key.pem"
 )
 
 func main() {

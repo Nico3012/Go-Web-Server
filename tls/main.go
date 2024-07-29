@@ -16,7 +16,7 @@ import (
 var (
 	hosts     = [...]string{"localhost", "127.0.0.1"}
 	notBefore = time.Date(2024, 7, 24, 0, 0, 0, 0, time.UTC)
-	notAfter  = notBefore.Add(5 * 365 * 24 * time.Hour)
+	notAfter  = notBefore.Add(2 * 365 * 24 * time.Hour)
 )
 
 func main() {
