@@ -1,0 +1,6 @@
+# go installation files
+# https://go.dev/dl/
+go*.tar.gz
+
+# executables:
+Go-Web-Server*
