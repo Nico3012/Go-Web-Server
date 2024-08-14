@@ -1,3 +1,6 @@
+<h2>Go create server certificate</h2>
+<code>go run generate_cert.go --host localhost,127.0.0.1 --ecdsa-curve P256</code>
+
 <h2>install a certificate authority (ca)</h2>
 
 <h5>Windows</h5>

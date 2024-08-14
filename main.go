@@ -11,5 +11,5 @@ func main() {
 		fmt.Fprintf(w, "Hi")
 	})
 
-	log.Fatal(http.ListenAndServeTLS(":443", "cert.pem", "key.pem", nil))
+	log.Fatal(http.ListenAndServeTLS(":4443", "tls/__copilot-backup__/cert.pem", "tls/__copilot-backup__/key.pem", nil))
 }
