@@ -11,5 +11,5 @@ func main() {
 		fmt.Fprintf(w, "Hi")
 	})
 
-	log.Fatal(http.ListenAndServeTLS(":4433", "tls/cert/cert.pem", "tls/cert/priv.pem", nil))
+	log.Fatal(http.ListenAndServeTLS(":4433", "tls/cert/trusted/cert.pem", "tls/cert/trusted/priv.pem", nil))
 }
