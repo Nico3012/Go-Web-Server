@@ -139,6 +139,19 @@ func main() {
 		template.KeyUsage |= x509.KeyUsageCertSign
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	derBytes, err := x509.CreateCertificate(rand.Reader, &template, &template, publicKey(priv), priv)
 	if err != nil {
 		log.Fatalf("Failed to create certificate: %v", err)

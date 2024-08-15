@@ -57,16 +57,15 @@ func main() {
 
 	// writing files:
 
-	// create cert.pem
-	certOut, err := os.Create("cert.pem")
+	// create ca.pem
+	certOut, err := os.Create("ca.pem")
 	if err != nil {
-		log.Fatalf("Failed to open cert.pem for writing: %v", err)
+		log.Fatalf("Failed to open ca.pem for writing: %v", err)
 	}
-
-	// write to cert.pem
+	// write to ca.pem
 	err = pem.Encode(certOut, &pem.Block{Type: "CERTIFICATE", Bytes: certBytes})
 	if err != nil {
-		log.Fatalf("Failed to write data to cert.pem: %v", err)
+		log.Fatalf("Failed to write data to ca.pem: %v", err)
 	}
 
 	// create key.pem
@@ -74,7 +73,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to open key.pem for writing: %v", err)
 	}
-
 	// write to key.pem
 	err = pem.Encode(keyOut, &pem.Block{Type: "PRIVATE KEY", Bytes: keyBytes})
 	if err != nil {
