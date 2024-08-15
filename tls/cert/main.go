@@ -18,12 +18,12 @@ import (
 func main() {
 	// read ca files
 
-	caFile, err := os.ReadFile("ca.pem")
+	caFile, err := os.ReadFile("../ca/trusted/ca.pem")
 	if err != nil {
 		log.Fatalf("Failed to read ca.pem file: %v", err)
 	}
 
-	keyFile, err := os.ReadFile("key.pem")
+	keyFile, err := os.ReadFile("../ca/trusted/key.pem")
 	if err != nil {
 		log.Fatalf("Failed to read key.pem file: %v", err)
 	}
@@ -80,7 +80,7 @@ func main() {
 		BasicConstraintsValid: true,
 	}
 
-	hosts := "localhost,127.0.0.1"
+	hosts := "localhost,127.0.0.1,192.168.2.53"
 	for _, host := range strings.Split(hosts, ",") {
 		ip := net.ParseIP(host)
 		if ip != nil {

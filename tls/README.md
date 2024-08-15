@@ -13,6 +13,12 @@
 <p>enable ca.pem in settings: "Zertifikatsvertrauenseinstellungen"</p>
 
 <h5>Android (Samsung)</h5>
+<p>"Sicherheit und Datenschutz"</p>
+<p>"Weitere Sicherheitseinstellungen"</p>
+<p>"Von Gerätespeicher installieren"</p>
+<p>choose "CA-Zertifikat"</p>
+<p>select your <code>ca.pem</code></p>
+<p>OLD:</p>
 <p>click "Von USB-Speicher installieren" in settings: "Zertifikatverwaltungs-App"</p>
 <p>choose "CA-Zertifikat"</p>
 <p>select your <code>ca.pem</code></p>

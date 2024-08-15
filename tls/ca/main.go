@@ -25,7 +25,7 @@ func main() {
 	}
 
 	notBefore := time.Now()
-	notAfter := notBefore.Add(2 * 365 * 24 * time.Hour)
+	notAfter := notBefore.Add(365 * 24 * time.Hour)
 
 	template := x509.Certificate{
 		SerialNumber: serialNumber,
