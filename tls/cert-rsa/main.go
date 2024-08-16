@@ -1,9 +1,8 @@
 package main
 
 import (
-	"crypto/ecdsa"
-	"crypto/elliptic"
 	"crypto/rand"
+	"crypto/rsa"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
@@ -18,12 +17,12 @@ import (
 func main() {
 	// read ca files
 
-	caFile, err := os.ReadFile("../ca/trusted/ca.pem")
+	caFile, err := os.ReadFile("../ca-rsa/trusted/ca.pem")
 	if err != nil {
 		log.Fatalf("Failed to read ca.pem file: %v", err)
 	}
 
-	keyFile, err := os.ReadFile("../ca/trusted/key.pem")
+	keyFile, err := os.ReadFile("../ca-rsa/trusted/key.pem")
 	if err != nil {
 		log.Fatalf("Failed to read key.pem file: %v", err)
 	}
@@ -54,7 +53,7 @@ func main() {
 
 	// generate new certificate stuff
 
-	priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	priv, err := rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
 		log.Fatalf("Failed to generate private key: %v", err)
 	}
@@ -75,7 +74,7 @@ func main() {
 		NotBefore: notBefore,
 		NotAfter:  notAfter,
 
-		KeyUsage:              x509.KeyUsageDigitalSignature,
+		KeyUsage:              x509.KeyUsageDigitalSignature | x509.KeyUsageKeyEncipherment,
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
 		BasicConstraintsValid: true,
 	}
