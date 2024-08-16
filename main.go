@@ -23,5 +23,5 @@ func main() {
 		Handler: handler,
 	}
 
-	server.ListenAndServeTLS("tls/cert-ecdsa/trusted/cert.pem", "tls/cert-ecdsa/trusted/priv.pem")
+	server.ListenAndServeTLS("tls/cert-rsa/trusted/cert.pem", "tls/cert-rsa/trusted/priv.pem")
 }
