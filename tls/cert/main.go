@@ -18,12 +18,12 @@ import (
 func main() {
 	// read ca files
 
-	caFile, err := os.ReadFile("../ca-ecdsa/trusted/ca.pem")
+	caFile, err := os.ReadFile("../ca/trusted/ca.pem")
 	if err != nil {
 		log.Fatalf("Failed to read ca.pem file: %v", err)
 	}
 
-	keyFile, err := os.ReadFile("../ca-ecdsa/trusted/key.pem")
+	caKeyFile, err := os.ReadFile("../ca/trusted/key.pem")
 	if err != nil {
 		log.Fatalf("Failed to read key.pem file: %v", err)
 	}
@@ -35,8 +35,8 @@ func main() {
 		log.Fatalf("Failed to decode PEM block containing certificate")
 	}
 
-	keyBlock, _ := pem.Decode(keyFile)
-	if keyBlock == nil || keyBlock.Type != "PRIVATE KEY" {
+	caKeyBlock, _ := pem.Decode(caKeyFile)
+	if caKeyBlock == nil || caKeyBlock.Type != "PRIVATE KEY" {
 		log.Fatalf("Failed to decode PEM block containing private key")
 	}
 
@@ -47,7 +47,7 @@ func main() {
 		log.Fatalf("Failed to parse ca certificate: %v", err)
 	}
 
-	caKey, err := x509.ParsePKCS8PrivateKey(keyBlock.Bytes)
+	caKey, err := x509.ParsePKCS8PrivateKey(caKeyBlock.Bytes)
 	if err != nil {
 		log.Fatalf("Failed to parse PKCS#8 private key: %v", err)
 	}
@@ -125,14 +125,14 @@ func main() {
 		log.Fatalf("Failed to write data to cert.pem: %v", err)
 	}
 
-	// create priv.pem
-	keyOut, err := os.Create("priv.pem")
+	// create key.pem
+	keyOut, err := os.Create("key.pem")
 	if err != nil {
 		log.Fatalf("Failed to open priv.pem for writing: %v", err)
 	}
-	// write to priv.pem
+	// write to key.pem
 	err = pem.Encode(keyOut, &pem.Block{Type: "PRIVATE KEY", Bytes: keyBytes})
 	if err != nil {
-		log.Fatalf("Failed to write data to priv.pem: %v", err)
+		log.Fatalf("Failed to write data to key.pem: %v", err)
 	}
 }

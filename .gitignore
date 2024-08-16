@@ -5,5 +5,5 @@ go*.tar.gz
 # executables:
 Go-Web-Server*
 
-privkey.pem
-fullchain.pem
+# private keys
+key.pem

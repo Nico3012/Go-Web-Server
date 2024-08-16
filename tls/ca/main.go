@@ -49,12 +49,12 @@ func main() {
 		IsCA:                  true,
 	}
 
-	// create cert and key
+	// create ca and key
 
 	// create certificate bytes
-	certBytes, err := x509.CreateCertificate(rand.Reader, &template, &template, &priv.PublicKey, priv)
+	caBytes, err := x509.CreateCertificate(rand.Reader, &template, &template, &priv.PublicKey, priv)
 	if err != nil {
-		log.Fatalf("Failed to create certificate: %v", err)
+		log.Fatalf("Failed to create certificate authority: %v", err)
 	}
 
 	// PKCS#8 is a standard for storing private key information for any algorithm
@@ -66,12 +66,12 @@ func main() {
 	// writing files:
 
 	// create ca.pem
-	certOut, err := os.Create("ca.pem")
+	caOut, err := os.Create("ca.pem")
 	if err != nil {
 		log.Fatalf("Failed to open ca.pem for writing: %v", err)
 	}
 	// write to ca.pem
-	err = pem.Encode(certOut, &pem.Block{Type: "CERTIFICATE", Bytes: certBytes})
+	err = pem.Encode(caOut, &pem.Block{Type: "CERTIFICATE", Bytes: caBytes})
 	if err != nil {
 		log.Fatalf("Failed to write data to ca.pem: %v", err)
 	}
