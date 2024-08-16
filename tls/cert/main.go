@@ -70,7 +70,15 @@ func main() {
 	certTemplate := x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
-			Organization: []string{"Liquipay UG (haftungsbeschränkt)"},
+			// if this information is missing, the certificate may not be trusted:
+			CommonName:         "liquipay.de",                                // required by openssl
+			Organization:       []string{"Liquipay UG (haftungsbeschränkt)"}, // required by openssl
+			OrganizationalUnit: []string{"IT"},                               // required by openssl
+			Country:            []string{"DE"},                               // required by openssl
+			Province:           []string{"Nordrhein-Westfalen"},              // required by openssl
+			Locality:           []string{"Lindlar"},                          // required by openssl
+			PostalCode:         []string{"51789"},                            // optional
+			StreetAddress:      []string{"Hauptstraße 10"},                   // optional
 		},
 		NotBefore: notBefore,
 		NotAfter:  notAfter,
