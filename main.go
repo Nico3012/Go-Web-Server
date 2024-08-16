@@ -1,18 +1,36 @@
 package main
 
 import (
-	"fmt"
+	"crypto/x509/pkix"
 	"log"
 	"net/http"
-	"os"
+
+	"github.com/Nico3012/Go-Web-Server/webserver"
 )
 
 func main() {
-	handler := http.NewServeMux()
+	cert, err := webserver.CreateCertificateFromAuthority("tls/ca/trusted/ca.pem", "tls/ca/trusted/key.pem", pkix.Name{
+		// if this information is missing, the certificate may not be trusted:
+		CommonName:         "liquipay.de",                                // required by openssl
+		Organization:       []string{"Liquipay UG (haftungsbeschränkt)"}, // required by openssl
+		OrganizationalUnit: []string{"IT"},                               // required by openssl
+		Country:            []string{"DE"},                               // required by openssl
+		Province:           []string{"Nordrhein-Westfalen"},              // required by openssl
+		Locality:           []string{"Lindlar"},                          // required by openssl
+		PostalCode:         []string{"51789"},                            // optional
+		StreetAddress:      []string{"Hauptstraße 10"},                   // optional
+	}, []string{
+		"localhost",
+		"127.0.0.1",
+		"192.168.2.53",
+	})
+	if err != nil {
+		log.Fatalf("Failed to create certificate from authority: %v", err)
+	}
 
-	/*handler.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hi")
-	})*/
+	// create handler and webserver:
+
+	/*handler := http.NewServeMux()
 
 	handler.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
@@ -27,18 +45,8 @@ func main() {
 		} else {
 			fmt.Fprintf(w, "This server only supports GET method! You sent a %s request.", r.Method)
 		}
-		//w.Header().Add("Content-Type", "text/html; charset=utf-8")
-		//w.WriteHeader(400)
-		//fmt.Fprintf(w, "<h1>Hallo Welt!!!</h1>")
-	})
+	})*/
 
-	server := &http.Server{
-		Addr:    ":4433", // listen on any address
-		Handler: handler,
-	}
-
-	err := server.ListenAndServeTLS("tls/cert/live/cert.pem", "tls/cert/live/key.pem")
-	if err != nil {
-		log.Fatalf("Failed to listen and server tls: %v", err)
-	}
+	err = webserver.ListenAndServeTLS(cert, http.FileServer(http.Dir("app")))
+	log.Fatalf("Failed: %v", err)
 }
