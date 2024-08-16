@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 )
@@ -36,5 +37,8 @@ func main() {
 		Handler: handler,
 	}
 
-	server.ListenAndServeTLS("tls/cert/live/cert.pem", "tls/cert/live/priv.pem")
+	err := server.ListenAndServeTLS("tls/cert/live/cert.pem", "tls/cert/live/key.pem")
+	if err != nil {
+		log.Fatalf("Failed to listen and server tls: %v", err)
+	}
 }
