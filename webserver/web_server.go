@@ -9,14 +9,15 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"errors"
-	"log"
 	"math/big"
 	"net"
+	"net/http"
 	"os"
 	"time"
 )
 
-func CreateCertificateFromAuthority(caPath string, keyPath string, subject pkix.Name, hosts []string) (tls.Certificate, error) {
+// creates a tls server certificate by using a ca and its key to sign this certificate
+func createCertificate(caPath string, keyPath string, subject pkix.Name, hosts []string) (tls.Certificate, error) {
 	// read ca and key file
 
 	caFile, err := os.ReadFile(caPath)
@@ -102,7 +103,7 @@ func CreateCertificateFromAuthority(caPath string, keyPath string, subject pkix.
 	// PKCS#8 is a standard for storing private key information for any algorithm
 	keyBytes, err := x509.MarshalPKCS8PrivateKey(priv)
 	if err != nil {
-		log.Fatalf("Unable to marshal private key: %v", err)
+		return tls.Certificate{}, nil
 	}
 
 	// create pem blocks
@@ -113,4 +114,35 @@ func CreateCertificateFromAuthority(caPath string, keyPath string, subject pkix.
 	// create tls certificate and return
 
 	return tls.X509KeyPair(certPEMBlock, keyPEMBlock)
+}
+
+func listenAndServeTLS(cert tls.Certificate, handler http.Handler) error {
+	netListener, err := net.Listen("tcp", ":443")
+	if err != nil {
+		return err
+	}
+
+	tlsListener := tls.NewListener(netListener, &tls.Config{
+		Certificates: []tls.Certificate{cert},
+	})
+
+	return http.Serve(tlsListener, handler)
+}
+
+func CreateWebServerAndCertificate(caPath string, keyPath string, subject pkix.Name, hosts []string, handler http.Handler) error {
+	cert, err := createCertificate(caPath, keyPath, subject, hosts)
+	if err != nil {
+		return err
+	}
+
+	return listenAndServeTLS(cert, handler)
+}
+
+func CreateWebServer(certPath string, keyPath string, handler http.Handler) error {
+	cert, err := tls.LoadX509KeyPair(certPath, keyPath)
+	if err != nil {
+		return err
+	}
+
+	return listenAndServeTLS(cert, handler)
 }
