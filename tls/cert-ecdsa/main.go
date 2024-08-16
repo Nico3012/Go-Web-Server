@@ -18,12 +18,12 @@ import (
 func main() {
 	// read ca files
 
-	caFile, err := os.ReadFile("../ca-rsa/trusted/ca.pem")
+	caFile, err := os.ReadFile("../ca-ecdsa/trusted/ca.pem")
 	if err != nil {
 		log.Fatalf("Failed to read ca.pem file: %v", err)
 	}
 
-	keyFile, err := os.ReadFile("../ca-rsa/trusted/key.pem")
+	keyFile, err := os.ReadFile("../ca-ecdsa/trusted/key.pem")
 	if err != nil {
 		log.Fatalf("Failed to read key.pem file: %v", err)
 	}

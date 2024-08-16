@@ -29,8 +29,15 @@ func main() {
 
 	template := x509.Certificate{
 		SerialNumber: serialNumber,
-		Subject: pkix.Name{
-			Organization: []string{"Liquipay UG (haftungsbeschränkt)"},
+		Subject: pkix.Name{ // must be filled because IOS requires more information than just the Organization to trust the ca
+			Organization:       []string{"Liquipay UG (haftungsbeschränkt)"},
+			Country:            []string{"DE"},
+			Province:           []string{"Nordrhein-Westfalen"},
+			Locality:           []string{"Lindlar"},
+			OrganizationalUnit: []string{"IT"},
+			CommonName:         "liquipay.de",
+			// StreetAddress: []string{"Hauptstraße 10"},
+			// PostalCode: []string{"51789"},
 		},
 		NotBefore: notBefore,
 		NotAfter:  notAfter,
