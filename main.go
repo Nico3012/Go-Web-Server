@@ -22,7 +22,7 @@ func main() {
 			}
 			w.Header().Add("Content-Type", "text/html; charset=utf-8") // first write headers
 			w.WriteHeader(200)                                         // send headers with status
-			fmt.Fprintf(w, string(file))                               // last send content
+			fmt.Fprint(w, string(file))                                // last send content
 		} else {
 			fmt.Fprintf(w, "This server only supports GET method! You sent a %s request.", r.Method)
 		}
@@ -36,5 +36,5 @@ func main() {
 		Handler: handler,
 	}
 
-	server.ListenAndServeTLS("tls/cert-ecdsa/trusted/cert.pem", "tls/cert-ecdsa/trusted/priv.pem")
+	server.ListenAndServeTLS("tls/cert/live/cert.pem", "tls/cert/live/priv.pem")
 }
