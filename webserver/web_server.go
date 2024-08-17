@@ -117,38 +117,34 @@ func createCertificate(caPath string, keyPath string, subject pkix.Name, hosts [
 	return tls.X509KeyPair(certPEMBlock, keyPEMBlock)
 }
 
-func listenAndServeTLS(cert tls.Certificate, handler http.Handler) error {
-	netListener, err := net.Listen("tcp", ":443")
+func listenAndServeTLS(addr string, cert tls.Certificate, handler http.Handler) error {
+	netListener, err := net.Listen("tcp", addr)
 	if err != nil {
 		return err
 	}
 
 	tlsListener := tls.NewListener(netListener, &tls.Config{
 		Certificates: []tls.Certificate{cert},
-		MinVersion:   tls.VersionTLS13,
-		CipherSuites: []uint16{
-			tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-		},
 	})
 
-	fmt.Println("Starting...")
+	fmt.Println("starting web server...")
 	return http.Serve(tlsListener, handler)
 }
 
-func CreateWebServerAndCertificate(caPath string, keyPath string, subject pkix.Name, hosts []string, handler http.Handler) error {
+func CreateWebServerAndCertificate(addr string, caPath string, keyPath string, subject pkix.Name, hosts []string, handler http.Handler) error {
 	cert, err := createCertificate(caPath, keyPath, subject, hosts)
 	if err != nil {
 		return err
 	}
 
-	return listenAndServeTLS(cert, handler)
+	return listenAndServeTLS(addr, cert, handler)
 }
 
-func CreateWebServer(certPath string, keyPath string, handler http.Handler) error {
+func CreateWebServer(addr string, certPath string, keyPath string, handler http.Handler) error {
 	cert, err := tls.LoadX509KeyPair(certPath, keyPath)
 	if err != nil {
 		return err
 	}
 
-	return listenAndServeTLS(cert, handler)
+	return listenAndServeTLS(addr, cert, handler)
 }
