@@ -124,6 +124,10 @@ func listenAndServeTLS(cert tls.Certificate, handler http.Handler) error {
 
 	tlsListener := tls.NewListener(netListener, &tls.Config{
 		Certificates: []tls.Certificate{cert},
+		MinVersion:   tls.VersionTLS13,
+		CipherSuites: []uint16{
+			tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+		},
 	})
 
 	return http.Serve(tlsListener, handler)
