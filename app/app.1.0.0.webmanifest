@@ -1,0 +1,15 @@
+{
+    "name": "Nico Test App",
+    "short_name": "Test App",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "description": "Description of this app",
+    "icons": [
+        {
+            "src": "img/app-icon.1.0.0.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
