@@ -9,6 +9,7 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"errors"
+	"fmt"
 	"math/big"
 	"net"
 	"net/http"
@@ -130,6 +131,7 @@ func listenAndServeTLS(cert tls.Certificate, handler http.Handler) error {
 		},
 	})
 
+	fmt.Println("Starting...")
 	return http.Serve(tlsListener, handler)
 }
 

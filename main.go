@@ -25,6 +25,7 @@ func main() {
 		"localhost",
 		"127.0.0.1",
 		"192.168.2.53",
+		"192.168.2.79",
 	}, handler)
 
 	log.Fatalf("Failed to create web server and certificate: %v", err)
