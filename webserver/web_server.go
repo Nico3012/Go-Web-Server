@@ -9,8 +9,6 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"errors"
-	"io"
-	"log"
 	"math/big"
 	"net"
 	"net/http"
@@ -135,44 +133,44 @@ func listenAndServeTLS(addr string, cert tls.Certificate, handler http.Handler) 
 		return err
 	}
 
-	for {
-		conn, err := listener.Accept()
-		if err != nil {
-			return err
-		}
+	// for {
+	// 	conn, err := listener.Accept()
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		tlsConn, ok := conn.(*tls.Conn)
-		if !ok {
-			return errors.New("failed to cast to TLS connection")
-		}
+	// 	tlsConn, ok := conn.(*tls.Conn)
+	// 	if !ok {
+	// 		return errors.New("failed to cast to TLS connection")
+	// 	}
 
-		err = tlsConn.Handshake()
-		if err != nil {
-			return err
-		}
+	// 	err = tlsConn.Handshake()
+	// 	if err != nil {
+	// 		return err
+	// 	}
 
-		buf := make([]byte, 1024)
-		for {
-			n, err := tlsConn.Read(buf)
-			if err != nil {
-				if err != io.EOF {
-					return err
-				}
-				break
-			}
+	// 	buf := make([]byte, 1024)
+	// 	for {
+	// 		n, err := tlsConn.Read(buf)
+	// 		if err != nil {
+	// 			if err != io.EOF {
+	// 				return err
+	// 			}
+	// 			break
+	// 		}
 
-			log.Printf("Received: %s", string(buf[:n]))
+	// 		log.Printf("Received: %s", string(buf[:n]))
 
-			_, err = tlsConn.Write([]byte("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 12\r\n\r\nHello World!"))
-			if err != nil {
-				break
-			}
-		}
-	}
+	// 		_, err = tlsConn.Write([]byte("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 12\r\n\r\nHello World!"))
+	// 		if err != nil {
+	// 			break
+	// 		}
+	// 	}
+	// }
 
 	// http module
 	// fmt.Println("starting web server...")
-	// return http.Serve(tlsListener, handler)
+	return http.Serve(listener, handler)
 }
 
 func CreateWebServerAndCertificate(addr string, caPath string, keyPath string, subject pkix.Name, hosts []string, handler http.Handler) error {
