@@ -1,0 +1,3 @@
+- check if CurveID only sets the key exchange algorithm
+- check if AES256 can be used by generating a longer key, by replacing P256 with e.g. RSA or P384
+- check how to control server signature verfahren
