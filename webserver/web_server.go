@@ -128,6 +128,9 @@ func listenAndServeTLS(addr string, cert tls.Certificate, handler http.Handler) 
 
 	listener, err := tls.Listen("tcp", addr, &tls.Config{
 		Certificates: []tls.Certificate{cert},
+		/*CurvePreferences: []tls.CurveID{
+			tls.X25519,
+		},*/
 	})
 	if err != nil {
 		return err
