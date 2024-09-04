@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Nico3012/Go-Web-Server/webserver"
+	"server/webserver"
 )
 
 // func getContentType(filename string) string {
