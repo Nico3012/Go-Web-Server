@@ -131,6 +131,11 @@ func listenAndServeTLS(addr string, cert tls.Certificate, handler http.Handler) 
 		/*CurvePreferences: []tls.CurveID{
 			tls.X25519,
 		},*/
+
+		// tls 1.3 does not allow to pick a specific cipher or prefer e.g. aes over chacha
+		// the used cipher is picked by the server and client automatically.
+		// often aes-gcm ist prefered over chacha if both (server and client) support AES hardware acceleration.
+		// e.g. raspberry PI 4 does not support AES hardware acceleration and therefore also prefers chacha (as client or as server)
 	})
 	if err != nil {
 		return err
