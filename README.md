@@ -1,4 +1,4 @@
-This project relies on the go programming language.
+This project relies heavy on the go programming language.
 
 Es ist nicht notwendig Kenntnisse zu haben, wie man go auf seine Zielplatform kompiliert und baut, da davon auszugehen ist, dass ein Projekt, welches weiterentwickelt wird, auch zukünftig sicherstellt, dass es auf verschiedensten ausführplatformen verfügbar ist (bzw. pre-build installer bereitstellt.)
 Das Go weiterentwickelt wird, ist insofern wichtig, da z.B. bei der Kryptografie Fortschritt stattfinden muss. Diese Implementierungen sind nicht durch die Entwicklungsresourcen in diesem Projekt zu stämmen, so dass sich drauf verlassen werden muss, dass Go diese Features aktuell und kompatibel zu allen modernen Webbrowsern hällt.
