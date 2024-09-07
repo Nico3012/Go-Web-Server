@@ -3,7 +3,7 @@
 Package is listed in package.json dependencies. Installation via npm.<br>
 Install without using package-lock.json because ~ is used to only allow patch updates. No major or minor updates<br>
 
-    npm install --no-save
+<code>npm install --no-save</code>
 
 # Update node version
 
