@@ -13,7 +13,7 @@ func main() {
 		"Test Data body",
 		"BFSfu2z0zKhv7a2v3MkubqySWA6r4VrWvT8XoxTBcJTr82GzTwNv8HZcwCqFXoNnrhLbDkxA5bw63LEUSTZ2whU",
 		"LPeRXr-5YZcVoWSwD3m7OYnE2tLplMz6tJcNl4-ARqI",
-		`{"endpoint":"https://fcm.googleapis.com/fcm/send/dZYhS3HjwGc:APA91bH_8Sm94ZNjaP06HDEjVSQszHMJtWKAYePRbYYqh5zrcECzFmveJtjjhMTkjY_vRxHL7tAXuaXHt9xznr4MqFE6DsgcbqZ-K5pgPBHWtxdWZ8J2HHPeBJ7Xnjty2Vdku7F3ot8f","expirationTime":null,"keys":{"p256dh":"BF5D4vTK0trh6tnARkYXFkBgZRB7j0d6itIYyj4FxiTwLy-CTLdUkpFxfAp_MNVmglSp-JgFV9ffayyfsXSULnc","auth":"fxROnv9PrEFGl0JmIJ_0qA"}}`,
+		`{"endpoint":"https://fcm.googleapis.com/fcm/send/ehATGXSIFuE:APA91bGL5GtVrgsY5NMAyKQ6yAnRHbWCxBTP6Z6MSSQT0do2L22h_4Gd0Khw0n4zL_mRwCn170Ep5RmeXu-hL9OVUNYmOCviPRqJdW91PU71N4A9oObmZGiUmkWtpgLf9PTaFR0reeQt","expirationTime":null,"keys":{"p256dh":"BDQFQMWnI9ClKvlPcgnGTs1IaB8KH-mJHrmuiow6MLO_FBdoe-7miE-dfgUEq16doqTH-nlLVe3B-rhD8mfJgRk","auth":"2V1MlfQU_dJxmbIpMIrAEw"}}`,
 	)
 
 	out, err := cmd.Output()
