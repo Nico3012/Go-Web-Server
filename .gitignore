@@ -7,3 +7,6 @@ Go-Web-Server*
 
 # private keys
 key.pem
+
+# node modules
+node_modules
