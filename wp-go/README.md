@@ -10,7 +10,7 @@ Install without using package-lock.json because ~ is used to only allow patch up
 Only make sure process.argv works the same as before.<br>
 Js language must be backwards compatible due to w3c.<br>
 
-# Update webpush
+# Update webpush (in package.json dependencies)
 
 make sure setVapidDetails function works the same as before<br>
 make sure sendNotification function works the same as before<br>
