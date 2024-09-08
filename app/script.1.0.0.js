@@ -22,16 +22,21 @@ subscribeButton.addEventListener("click", async () => {
             if (unsubscribeStatus === false) throw new Error("failed to unsubscribe");
         }
 
-        // const publicKeyResponse = await fetch("/public-key.json");
+        const publicKeyResponse = await fetch("/public-key.txt");
 
-        const publicKey = "BFSfu2z0zKhv7a2v3MkubqySWA6r4VrWvT8XoxTBcJTr82GzTwNv8HZcwCqFXoNnrhLbDkxA5bw63LEUSTZ2whU"; // await publicKeyResponse.json();
+        const publicKey = await publicKeyResponse.text();
 
         const subscription = await sw.pushManager.subscribe({
             applicationServerKey: publicKey,
             userVisibleOnly: true
         });
 
-        console.log(JSON.stringify(subscription));
+        const subscribeResponse = await fetch("/subscribe", {
+            method: "POST",
+            body: JSON.stringify(subscription)
+        });
+
+        if (!subscribeResponse.ok) throw new Error("subscribeResponse was not ok!");
 
         /*const subscriptionResponse = await fetch("/subscribe.json", {
             body: JSON.stringify(subscription),

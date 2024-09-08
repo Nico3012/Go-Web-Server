@@ -2,9 +2,13 @@ package main
 
 import (
 	"crypto/x509/pkix"
+	"encoding/json"
 	"fmt"
+	"io"
+	"io/fs"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/Nico3012/Go-Web-Server/webserver"
 )
@@ -37,11 +41,62 @@ import (
 // 	return "application/octet-stream"
 // }
 
+type PushConfig struct {
+	PublicKey     string
+	PrivateKey    string
+	Subscriptions []string
+}
+
 func main() {
 	handler := http.NewServeMux()
 
-	handler.HandleFunc("/index.html", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hallo Welt!")
+	handler.HandleFunc("/public-key.txt", func(w http.ResponseWriter, r *http.Request) {
+		var pushConfig PushConfig
+
+		push, err := os.ReadFile("push.json")
+		if err != nil {
+			log.Fatalf("Failed to read push.json file: %v", err)
+		}
+
+		err = json.Unmarshal(push, &pushConfig)
+		if err != nil {
+			log.Fatalf("Failed to unmarshal content from push.json file: %v", err)
+		}
+
+		fmt.Fprintf(w, pushConfig.PublicKey)
+	})
+
+	handler.HandleFunc("/subscribe", func(w http.ResponseWriter, r *http.Request) {
+		subscription, err := io.ReadAll(r.Body)
+		if err != nil {
+			log.Fatalf("Failed to read body un /subscribe route: %v", err)
+		}
+
+		var pushConfig PushConfig
+
+		push, err := os.ReadFile("push.json")
+		if err != nil {
+			log.Fatalf("Failed to read push.json file: %v", err)
+		}
+
+		err = json.Unmarshal(push, &pushConfig)
+		if err != nil {
+			log.Fatalf("Failed to unmarshal content from push.json file: %v", err)
+		}
+
+		pushConfig.Subscriptions = append(pushConfig.Subscriptions, string(subscription))
+
+		push, err = json.Marshal(pushConfig)
+		if err != nil {
+			log.Fatalf("Failed to marshal pushConfig to JSON: %v", err)
+		}
+
+		err = os.WriteFile("push.json", push, fs.FileMode(os.O_WRONLY))
+		if err != nil {
+			log.Fatalf("Failed to write push.json file: %v", err)
+		}
+
+		fmt.Fprintf(w, "")
 	})
 
 	handler.Handle("/", http.FileServer(http.Dir("app")))
