@@ -4,6 +4,7 @@ go*.tar.gz
 
 # executables:
 Go-Web-Server*
+*.exe
 
 # private keys
 key.pem
