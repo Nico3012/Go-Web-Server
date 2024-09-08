@@ -10,3 +10,6 @@ key.pem
 
 # node modules
 node_modules
+
+# push configuration
+push.json
