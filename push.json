@@ -1,1 +1,5 @@
-{"PublicKey":"BFSfu2z0zKhv7a2v3MkubqySWA6r4VrWvT8XoxTBcJTr82GzTwNv8HZcwCqFXoNnrhLbDkxA5bw63LEUSTZ2whU","PrivateKey":"LPeRXr-5YZcVoWSwD3m7OYnE2tLplMz6tJcNl4-ARqI","Subscriptions":["{\"endpoint\":\"https://wns2-am3p.notify.windows.com/w/?token=BQYAAADTBb2j%2faxzz0xWY3PEvXjeCKiE0aP6d3p9xbgOOK8%2b3Bd79%2bW9eX9u3KvvmNTdLPdF6Mr1vTMgvx6EOA2lLHEyXBLYfBgqmVmPJTR%2fapTy%2bOpxHmjxroBseLMmqBpueTPEj3Dj46%2bf%2fWzprlHYXMFibnonR6bPpBdjTbki7OgGATqX4BlMy8F98%2fcPk8sYREs6cxufmpuBhFwSrtyYPs0JUM1IZwimX9q9aTCO9zc3yEACtzHhwXMdWi%2fzkfnUtRjnBWZ4VzWJx6cf99VJCbufB9vRB27G8QKhgNk8xoviPOgkRB1dou%2bFFsNyoxGqyc0%3d\",\"expirationTime\":null,\"keys\":{\"p256dh\":\"BFX5y4a6hKIyabIDxM6tYPgEdMeyy-RjPgq_0GLh770wCsIJ9BrBdZa1QnE1k-imM8BktphdJGhJJpca69wMxaU\",\"auth\":\"IMLyy2UZeyi1QipBsXoBSw\"}}"]}
+{
+    "PublicKey": "BFSfu2z0zKhv7a2v3MkubqySWA6r4VrWvT8XoxTBcJTr82GzTwNv8HZcwCqFXoNnrhLbDkxA5bw63LEUSTZ2whU",
+    "PrivateKey": "LPeRXr-5YZcVoWSwD3m7OYnE2tLplMz6tJcNl4-ARqI",
+    "Subscriptions": []
+}
