@@ -2,9 +2,15 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"log"
 	"os"
 	"os/exec"
+)
+
+var (
+	title = flag.String("title", "Default title", "Notification title")
+	body  = flag.String("body", "Default body", "Notification body")
 )
 
 type PushConfig struct {
@@ -14,6 +20,8 @@ type PushConfig struct {
 }
 
 func main() {
+	flag.Parse()
+
 	var pushConfig PushConfig
 
 	push, err := os.ReadFile("../push.json")
@@ -32,8 +40,8 @@ func main() {
 		cmd := exec.Command(
 			"node",
 			"main.js",
-			"Test Notification",
-			"Test Data body",
+			*title,
+			*body,
 			pushConfig.PublicKey,
 			pushConfig.PrivateKey,
 			subscription,

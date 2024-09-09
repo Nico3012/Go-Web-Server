@@ -1,5 +1,5 @@
 if ("serviceWorker" in navigator) {
-    await navigator.serviceWorker.register("./sw.1.0.0.js", {
+    await navigator.serviceWorker.register("./sw.1.1.0.js", {
         type: "module"
     });
 } else {
@@ -37,6 +37,7 @@ subscribeButton.addEventListener("click", async () => {
         });
 
         if (!subscribeResponse.ok) throw new Error("subscribeResponse was not ok!");
+        else alert("done!");
 
         /*const subscriptionResponse = await fetch("/subscribe.json", {
             body: JSON.stringify(subscription),
