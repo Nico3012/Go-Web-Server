@@ -1,5 +1,5 @@
 if ("serviceWorker" in navigator) {
-    await navigator.serviceWorker.register("./sw.1.1.0.js", {
+    await navigator.serviceWorker.register("./sw.js", {
         type: "module"
     });
 } else {

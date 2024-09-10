@@ -10,7 +10,7 @@ const result = await webpush.sendNotification(JSON.parse(subscription), JSON.str
 }));
 
 // return stdoutput to go as string
-console.log(result.statusCode.toString());
+process.stdout.write(result.statusCode.toString())
 
 // const { publicKey, privateKey } = webpush.generateVAPIDKeys();
 // console.log(publicKey, privateKey);

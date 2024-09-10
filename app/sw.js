@@ -3,10 +3,22 @@ self.addEventListener("push", (event) => {
 
     if ("title" in data && "body" in data) event.waitUntil(
         self.registration.showNotification(data.title, {
-            badge: "./img/notification-badge.1.0.0.png", // 96x96
-            icon: "./img/notification-icon.1.0.0.png", // unknown resolution
+            badge: "./img/logo_white_standalone_96.png", // 96x96
+            icon: "./img/logo_blue_standalone_256.png", // unknown resolution
             body: data.body,
         })
+    );
+});
+
+self.addEventListener("fetch", async (event) => {
+    event.waitUntil(
+        event.respondWith((async () => {
+            try {
+                return await fetch(event.request);
+            } catch (error) {
+                return new Response(`fetch failed with: ${error.message}`);
+            }
+        })()),
     );
 });
 

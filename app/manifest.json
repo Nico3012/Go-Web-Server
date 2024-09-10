@@ -7,7 +7,7 @@
     "description": "Description of this app",
     "icons": [
         {
-            "src": "img/app-icon.1.0.0.png",
+            "src": "img/logo_app_icon_512.png",
             "sizes": "512x512",
             "type": "image/png"
         }

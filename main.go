@@ -3,13 +3,14 @@ package main
 import (
 	"crypto/x509/pkix"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
-	"io/fs"
 	"log"
 	"net/http"
 	"os"
 
+	"github.com/Nico3012/Go-Web-Server/push"
 	"github.com/Nico3012/Go-Web-Server/webserver"
 )
 
@@ -53,6 +54,11 @@ func main() {
 	handler.HandleFunc("/public-key.txt", func(w http.ResponseWriter, r *http.Request) {
 		var pushConfig PushConfig
 
+		_, err := os.Stat("push.json")
+		if errors.Is(err, os.ErrNotExist) {
+			push.GeneratePushJson()
+		}
+
 		push, err := os.ReadFile("push.json")
 		if err != nil {
 			log.Fatalf("Failed to read push.json file: %v", err)
@@ -74,6 +80,11 @@ func main() {
 
 		var pushConfig PushConfig
 
+		_, err = os.Stat("push.json")
+		if errors.Is(err, os.ErrNotExist) {
+			push.GeneratePushJson()
+		}
+
 		push, err := os.ReadFile("push.json")
 		if err != nil {
 			log.Fatalf("Failed to read push.json file: %v", err)
@@ -91,12 +102,17 @@ func main() {
 			log.Fatalf("Failed to marshal pushConfig to JSON: %v", err)
 		}
 
-		err = os.WriteFile("push.json", push, fs.FileMode(os.O_WRONLY))
+		err = os.WriteFile("push.json", push, 0777)
 		if err != nil {
 			log.Fatalf("Failed to write push.json file: %v", err)
 		}
 
 		fmt.Fprintf(w, "")
+	})
+
+	handler.HandleFunc("/push", func(w http.ResponseWriter, r *http.Request) {
+		push.Push("Test Titel", "Test Body")
+		fmt.Fprintf(w, "Done!")
 	})
 
 	fs := http.FileServer(http.Dir("app"))
@@ -145,7 +161,9 @@ func main() {
 		"localhost",
 		"127.0.0.1",
 		"192.168.2.53",
-		"192.168.2.79",
+		"192.168.2.79",             //
+		"nico-laptop.speedport.ip", // Nico-Laptop Speedport
+		"192.168.2.225",            // Noah router
 	}, handler)
 
 	log.Fatalf("Failed to create web server and certificate: %v", err)
