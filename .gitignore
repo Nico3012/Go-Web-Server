@@ -13,4 +13,4 @@ key.pem
 node_modules
 
 # push configuration
-push.json
+# push.json
