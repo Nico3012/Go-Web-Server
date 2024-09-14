@@ -96,7 +96,7 @@ func main() {
 		fs.ServeHTTP(w, r)
 	})
 
-	err := webserver.CreateWebServerAndCertificate(":443", "ca.pem", "key.pem", []string{
+	err := webserver.CreateWebServerAndCertificate(":443", "trusted/ca.pem", "trusted/key.pem", []string{
 		"localhost",
 		"127.0.0.1",
 		"192.168.2.53",
