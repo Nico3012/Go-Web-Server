@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <!-- layout viewport (width) = ideal viewport (device-width) -->
+        <!-- window.devicePixelRatio: device pixels / ideal viewport -->
+        <script type="module" src="script.1.1.3b.js"></script>
+        <title>Document</title>
+        <style>
+            canvas.page-1 {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            #tools {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 64px;
+                background-color: #2f8bd7;
+            }
+
+            body {
+                background-color: #2f2f2f;
+            }
+
+            #canvases {
+                position: absolute;
+                top: 72px;
+                left: 32px;
+                right: 32px;
+                bottom: 8px;
+                background-color: #ffffff;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="tools">
+            <button id="toggle-pencil-eraser">Toggle Pencil Eraser</button>
+            <button id="toggle-draw-without-pencil">toggle-draw-without-pencil</button>
+            <input type="number" id="current-line-width" min="1" step="1" max="32" value="2">
+            <input type="color" id="current-color" value="#2f8bd7">
+        </div>
+
+        <div id="canvases">
+            <canvas class="page-1 completed-paths-canvas" id="page-1-completed-paths-canvas"></canvas>
+            <canvas class="page-1 prediction-paths-canvas" id="page-1-prediction-paths-canvas"></canvas>
+            <canvas class="page-1 active-paths-canvas" id="page-1-active-paths-canvas"></canvas>
+        </div>
+    </body>
+</html>

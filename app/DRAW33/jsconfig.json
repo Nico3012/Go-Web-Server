@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+
+        "target": "ESNext", // top level await
+        "module": "ESNext", // top level await
+
+        /*"lib": [
+            "ESNext",
+            "DOM"
+        ]*/
+    },
+    "include": [
+        "./**/*.js",
+        "./**/*.mjs"
+    ]
+}
