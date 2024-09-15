@@ -1,6 +1,6 @@
 go 1.23.1
 
 use (
+	.
 	./local/webserver
-	./main
 )

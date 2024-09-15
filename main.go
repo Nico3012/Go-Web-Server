@@ -9,8 +9,9 @@ import (
 	"net/http"
 	"os"
 
+	"webserver"
+
 	"github.com/Nico3012/Go-Web-Server/push"
-	"github.com/Nico3012/webserver"
 )
 
 type PushConfig struct {
