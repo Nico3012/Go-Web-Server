@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"os"
 
-	"webserver"
+	webserver "nicowebserver"
 
 	"github.com/Nico3012/Go-Web-Server/push"
 )
